@@ -4,6 +4,7 @@
       <div class="catalogue-item" v-for="(item, index) in configPages.pages" :key="index">
         {{ item.name }}
       </div>
+      <fluent-button appearance="accent">按钮样式测试</fluent-button>
     </div>
     <div class="md-content-box">
       <v-md-preview :text="text"></v-md-preview>

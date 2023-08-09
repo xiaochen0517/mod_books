@@ -5,6 +5,12 @@
 </template>
 
 <script setup lang="ts">
+  import {onMounted} from "vue";
+  import {fillColor, neutralLayer2} from "@fluentui/web-components";
+
+  onMounted(() => {
+    fillColor.setValueFor(document.body, neutralLayer2);
+  });
 
 </script>
 
