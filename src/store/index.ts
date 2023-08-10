@@ -1,14 +1,12 @@
-import { createStore } from 'vuex'
+import {createStore} from 'vuex'
+import createPersistedState from 'vuex-persistedstate'
+
+import ConfigStore from './ConfigStore'
 
 export default createStore({
-  state: {
-  },
-  getters: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
   modules: {
-  }
+    ConfigStore
+  },
+  // 在 plugins 中添加 vuex-persistedstate 插件
+  plugins: [createPersistedState()],
 })

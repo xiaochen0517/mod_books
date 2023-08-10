@@ -10,7 +10,7 @@ import '@kangc/v-md-editor/lib/style/preview.css';
 // @ts-ignore
 import githubTheme from '@kangc/v-md-editor/lib/theme/github.js';
 import '@kangc/v-md-editor/lib/theme/style/github.css';
-import { provideFluentDesignSystem, allComponents } from '@fluentui/web-components';
+import {provideFluentDesignSystem, allComponents} from '@fluentui/web-components';
 
 provideFluentDesignSystem().register(allComponents);
 

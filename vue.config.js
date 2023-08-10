@@ -16,6 +16,17 @@ module.exports = defineConfig({
       }),
     ],
   },
+  chainWebpack: config => {
+    config.module
+      .rule('vue')
+      .use('vue-loader')
+      .tap(options => ({
+        ...options,
+        compilerOptions: {
+          isCustomElement: tag => tag.startsWith('fluent-')
+        }
+      }))
+  },
   css: {
     loaderOptions: {
       less: {
@@ -23,5 +34,5 @@ module.exports = defineConfig({
         additionalData: `@import "~@/assets/styles/variables.less";`,
       }
     }
-  }
+  },
 })
