@@ -1,2 +1,11 @@
 pages:
-  - name: test_md
+  - name: MOD_BOOKS 介绍
+    path: README.md
+  - name: MOD_BOOKS 配置项
+    path: config/README.md
+    children:
+      - name: 主配置项
+        path: config/settings.md
+      - name: 页面配置项
+        path: config/pages.md
+main_path: pages

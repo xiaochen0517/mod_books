@@ -1,26 +1,43 @@
 <template>
   <div class="app-view dark-theme">
-    <router-view v-if="pageVisible"/>
+    <a-config-provider
+        :theme="antdTheme"
+    >
+      <router-view v-if="pageVisible"/>
+    </a-config-provider>
   </div>
 </template>
 
 <script setup lang="ts">
-  import {onMounted, ref} from "vue";
-  import {fillColor, neutralLayer2} from "@fluentui/web-components";
+  import {onMounted, ref, watch} from "vue";
   import axios from "@/plugins/axios";
   import {useStore} from "vuex";
   import yaml from "js-yaml";
   import defaultSetting from "@/assets/json/default_setting.json";
   import defaultPages from "@/assets/json/default_pages.json";
+  import {theme} from "ant-design-vue";
 
   const store = useStore();
 
-  const configSettings = ref<any>(null);
+  const configSettings = ref<any>(defaultSetting);
   const configPages = ref<any>({pages: []});
   const pageVisible = ref<boolean>(false);
+  const antdTheme = ref<any>({});
+
+  watch(configSettings, (newVal) => {
+    switch (newVal.theme) {
+      case "light":
+        antdTheme.value["algorithm"] = theme.defaultAlgorithm;
+        break;
+      case "dark":
+        antdTheme.value["algorithm"] = theme.darkAlgorithm;
+        break;
+      default:
+    }
+    console.log(antdTheme.value)
+  });
 
   onMounted(async () => {
-    fillColor.setValueFor(document.body, neutralLayer2);
     await getModSetting();
     await getPagesConfig();
     // test
@@ -34,7 +51,7 @@
   });
 
   const getModSetting = async () => {
-    let res = await axios.get("/mod_setting.yml");
+    let res = await axios.get("/mod_settings.yml");
     let settingConfig: any = yaml.load(res.data);
     configSettings.value = {...defaultSetting, ...settingConfig};
   };
