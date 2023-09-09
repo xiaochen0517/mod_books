@@ -1,6 +1,6 @@
 <template>
   <div class="home-view">
-    <div class="top-header">
+    <div class="top-header flex-row flex-ai-center">
       <a-button @click="switchTheme">切换主题</a-button>
     </div>
     <div class="flex-row">
@@ -14,7 +14,8 @@
                    :theme="configTheme"
                    :previewTheme="mdTheme.previewTheme"
                    :codeTheme="mdTheme.codeTheme"/>
-        <MdCatalog class="catalog-box" editorId="preview-only" :scrollElement="scrollElement"/>
+        <MdCatalog class="catalog-box primary-text-color" editorId="preview-only"
+                   :scrollElement="scrollElement"/>
       </div>
     </div>
   </div>
@@ -31,8 +32,8 @@ import router from "@/router";
 
 const scrollElement = document.documentElement;
 const mdTheme = reactive({
-    previewTheme: "github",
-    codeTheme: "atom",
+  previewTheme: "github",
+  codeTheme: "atom",
 });
 
 const store = useStore();
@@ -44,79 +45,79 @@ const pageMainPath = computed(() => store.state.ConfigStore.pagesConfig.main_pat
 const mdFilePath = computed(() => router.currentRoute.value.params.mdPath);
 
 onMounted(() => {
-    // 获取链接中的参数
-    console.log("router", mdFilePath);
-    initMdContent();
+  // 获取链接中的参数
+  console.log("router", mdFilePath);
+  initMdContent();
 });
 
 watch(mdFilePath, () => {
-    initMdContent();
+  initMdContent();
 });
 
 const initMdContent = () => {
-    if (mdFilePath.value && typeof mdFilePath.value === "string") {
-        if (pageMainPath.value) {
-            getMdFile(mdFilePath.value);
-        } else {
-            setTimeout(() => {
-                initMdContent();
-            }, 500);
-        }
+  if (mdFilePath.value && typeof mdFilePath.value === "string") {
+    if (pageMainPath.value) {
+      getMdFile(mdFilePath.value);
+    } else {
+      setTimeout(() => {
+        initMdContent();
+      }, 500);
     }
+  }
 };
 
 const getMdFile = (path: string) => {
-    // 将path中被转义的/转回来
-    path = path.replace(/%2F/g, "/");
-    console.log("load md file", path);
-    axios.get(`/${pageMainPath.value}/${path}`).then(res => {
-        text.value = res.data;
-    });
+  // 将path中被转义的/转回来
+  path = path.replace(/%2F/g, "/");
+  console.log("load md file", path);
+  axios.get(`/${pageMainPath.value}/${path}`).then(res => {
+    text.value = res.data;
+  });
 };
 
 const directoryClickHandle = (item: any) => {
-    // 对path中的/进行转义
-    item.path = item.path.replace(/\//g, "%2F");
-    router.push({path: `/home/${item.path}`});
+  // 对path中的/进行转义
+  item.path = item.path.replace(/\//g, "%2F");
+  router.push({path: `/home/${item.path}`});
 };
 
 const configTheme = computed(() => store.state.ConfigStore.settings.theme);
 const switchTheme = () => {
-    switch (configTheme.value) {
-    case "light":
-        store.commit("setTheme", "dark");
-        break;
-    case "dark":
-        store.commit("setTheme", "light");
-        break;
-    default:
-    }
+  switch (configTheme.value) {
+  case "light":
+    store.commit("setTheme", "dark");
+    break;
+  case "dark":
+    store.commit("setTheme", "light");
+    break;
+  default:
+  }
 };
 </script>
 
 <style scoped lang="less">
-  .home-view {
-    .directory-list {
+.home-view {
+  .directory-list {
+    flex: 1;
+    box-sizing: border-box;
+    padding: 10px;
+  }
+
+  .md-content-box {
+    flex: 3;
+    box-sizing: border-box;
+    padding: 10px;
+
+    .preview-box {
+      flex: 4;
+      box-sizing: border-box;
+      background-color: transparent;
+    }
+
+    .catalog-box {
       flex: 1;
       box-sizing: border-box;
-      padding: 10px;
-    }
-
-    .md-content-box {
-      flex: 3;
-      box-sizing: border-box;
-      padding: 10px;
-
-      .preview-box {
-        flex: 4;
-        box-sizing: border-box;
-        background-color: transparent;
-      }
-
-      .catalog-box {
-        flex: 1;
-        box-sizing: border-box;
-      }
     }
   }
+}
 </style>
