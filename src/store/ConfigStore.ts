@@ -1,9 +1,12 @@
 const ConfigStore = {
   state: {
     pagesConfig: {
-      pages: []
+      pages: [],
+      main_path: '',
     },
-    settings: {}
+    settings: {
+      theme: 'light',
+    }
   },
   getters: {
     getPagesConfig: (state: { pagesConfig: any }) => state.pagesConfig,
@@ -15,6 +18,9 @@ const ConfigStore = {
     },
     setSettings (state: { settings: any }, payload: any) {
       state.settings = payload
+    },
+    setTheme (state: { settings: any }, payload: string) {
+      state.settings.theme = payload
     }
   },
   actions: {},

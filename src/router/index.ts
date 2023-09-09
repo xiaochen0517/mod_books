@@ -3,10 +3,10 @@ import {createRouter, createWebHashHistory} from "vue-router";
 const routes = [
   {
     path: "/",
-    redirect: "/home",
+    redirect: "/home/README.md",
   },
   {
-    path: "/home",
+    path: "/home/:mdPath",
     name: "home",
     component: () => import("../views/HomeView.vue"),
   },
