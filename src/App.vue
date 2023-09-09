@@ -79,7 +79,15 @@ body,
 .app-view {
   margin: 0;
   padding: 0;
-  height: 100%;
+  min-height: 100%;
   width: 100%;
+}
+
+#app {
+  display: flex;
+
+  .app-view {
+    flex-grow: 1;
+  }
 }
 </style>
