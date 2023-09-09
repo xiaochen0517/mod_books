@@ -1,5 +1,5 @@
 <template>
-  <div class="app-view dark-theme">
+  <div class="app-view" :class="isDark?'dark-theme':'light-theme'">
     <a-config-provider
         :theme="antdTheme"
     >
@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-  import {onMounted, ref, watch} from "vue";
+  import {computed, onMounted, ref, watch} from "vue";
   import axios from "@/plugins/axios";
   import {useStore} from "vuex";
   import yaml from "js-yaml";
@@ -24,30 +24,33 @@
   const pageVisible = ref<boolean>(false);
   const antdTheme = ref<any>({});
 
-  watch(configSettings, (newVal) => {
-    switch (newVal.theme) {
+  const isDark = ref<boolean>(false);
+  const configTheme = computed(() => store.state.ConfigStore.settings.theme);
+
+  watch(configTheme, (newVal) => {
+    switch (newVal) {
       case "light":
         antdTheme.value["algorithm"] = theme.defaultAlgorithm;
+        isDark.value = false;
         break;
       case "dark":
         antdTheme.value["algorithm"] = theme.darkAlgorithm;
+        isDark.value = true;
         break;
       default:
     }
-    console.log(antdTheme.value)
   });
 
   onMounted(async () => {
     await getModSetting();
     await getPagesConfig();
-    // test
-    console.log(configSettings.value);
-    console.log(configPages.value);
     // 将数据保存到vuex
     store.commit("setSettings", configSettings.value);
     store.commit("setPagesConfig", configPages.value);
     // 显示页面
     pageVisible.value = true;
+    console.log("configSettings", store.state.ConfigStore.settings);
+    console.log("configPages", store.state.ConfigStore.pagesConfig);
   });
 
   const getModSetting = async () => {
