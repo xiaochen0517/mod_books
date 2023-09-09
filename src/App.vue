@@ -1,5 +1,5 @@
 <template>
-  <div class="app-view" :class="isDark?'dark-theme':'light-theme'">
+  <div class="app-view" :class="configTheme === 'dark'?'dark-theme':'light-theme'">
     <a-config-provider
         :theme="antdTheme"
     >
@@ -24,18 +24,15 @@
   const pageVisible = ref<boolean>(false);
   const antdTheme = ref<any>({});
 
-  const isDark = ref<boolean>(false);
   const configTheme = computed(() => store.state.ConfigStore.settings.theme);
 
   watch(configTheme, (newVal) => {
     switch (newVal) {
       case "light":
         antdTheme.value["algorithm"] = theme.defaultAlgorithm;
-        isDark.value = false;
         break;
       case "dark":
         antdTheme.value["algorithm"] = theme.darkAlgorithm;
-        isDark.value = true;
         break;
       default:
     }
@@ -47,10 +44,18 @@
     // 将数据保存到vuex
     store.commit("setSettings", configSettings.value);
     store.commit("setPagesConfig", configPages.value);
+    // 设置antd主题
+    switch (configTheme.value) {
+      case "light":
+        antdTheme.value["algorithm"] = theme.defaultAlgorithm;
+        break;
+      case "dark":
+        antdTheme.value["algorithm"] = theme.darkAlgorithm;
+        break;
+      default:
+    }
     // 显示页面
     pageVisible.value = true;
-    console.log("configSettings", store.state.ConfigStore.settings);
-    console.log("configPages", store.state.ConfigStore.pagesConfig);
   });
 
   const getModSetting = async () => {
