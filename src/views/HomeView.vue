@@ -110,6 +110,7 @@ const switchTheme = () => {
       .preview-box {
         flex: 4;
         box-sizing: border-box;
+        background-color: transparent;
       }
 
       .catalog-box {
