@@ -1,22 +1,23 @@
 <script setup lang="ts">
-  import {defineProps, defineEmits, ref} from "vue";
+import {ref} from "vue";
 
+// eslint-disable-next-line
   const props = defineProps({
     directory: {
-      type: Array,
-      default: () => []
+        type: Array,
+        default: () => []
     }
-  })
+});
 
-  // eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line
   const emits = defineEmits(["onClick"]);
 
-  const searchValue = ref<string>("");
+const searchValue = ref<string>("");
 
-  const onSelect = (selectedKeys: any, info: any) => {
-    console.log('selected', selectedKeys, info);
+const onSelect = (selectedKeys: any, info: any) => {
+    console.log("selected", selectedKeys, info);
     emits("onClick", info.node);
-  }
+};
 
 </script>
 

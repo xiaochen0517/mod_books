@@ -5,12 +5,12 @@
 </template>
 
 <script setup lang="ts">
-  import {computed} from "vue";
-  import {useStore} from "vuex";
-  import TreeListItemComponent from "@/components/directory/TreeListItemComponent.vue";
+import {computed} from "vue";
+import {useStore} from "vuex";
+import TreeListItemComponent from "@/components/directory/TreeListItemComponent.vue";
 
-  const store = useStore();
-  const pageConfig = computed(() => store.state.ConfigStore.pagesConfig);
+const store = useStore();
+const pageConfig = computed(() => store.state.ConfigStore.pagesConfig);
 
 </script>
 
