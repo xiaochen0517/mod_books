@@ -31,11 +31,6 @@ module.exports = {
     "vue"
   ],
   "rules": {
-    // 设置缩进为2个空格
-    "indent": [
-      "error",
-      2
-    ],
     // 设置template缩进为2个空格
     "vue/html-indent": [
       "error",
@@ -44,7 +39,10 @@ module.exports = {
     // 设置script缩进为2个空格
     "vue/script-indent": [
       "error",
-      2
+      2,
+      {
+        "switchCase": 1
+      }
     ],
     "linebreak-style": [
       "error",

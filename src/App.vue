@@ -25,15 +25,7 @@ const antdTheme = ref<any>({});
 const configTheme = computed(() => store.state.ConfigStore.settings.theme);
 
 watch(configTheme, (newVal) => {
-  switch (newVal) {
-  case "light":
-    antdTheme.value["algorithm"] = theme.defaultAlgorithm;
-    break;
-  case "dark":
-    antdTheme.value["algorithm"] = theme.darkAlgorithm;
-    break;
-  default:
-  }
+  refreshAntdTheme(newVal);
 });
 
 onMounted(async () => {
@@ -43,18 +35,23 @@ onMounted(async () => {
   store.commit("setSettings", configSettings.value);
   store.commit("setPagesConfig", configPages.value);
   // 设置antd主题
-  switch (configTheme.value) {
-  case "light":
-    antdTheme.value["algorithm"] = theme.defaultAlgorithm;
-    break;
-  case "dark":
-    antdTheme.value["algorithm"] = theme.darkAlgorithm;
-    break;
-  default:
-  }
+  refreshAntdTheme(configSettings.value.theme);
   // 显示页面
   pageVisible.value = true;
 });
+
+const refreshAntdTheme = (themeValue: string) => {
+  switch (themeValue) {
+    case "light":
+      antdTheme.value["algorithm"] = theme.defaultAlgorithm;
+      break;
+    case "dark":
+      antdTheme.value["algorithm"] = theme.darkAlgorithm;
+      break;
+    default:
+      antdTheme.value["algorithm"] = theme.defaultAlgorithm;
+  }
+};
 
 const getModSetting = async () => {
   let res = await axios.get("/mod_settings.yml");
