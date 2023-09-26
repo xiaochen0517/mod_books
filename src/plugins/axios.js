@@ -1,6 +1,6 @@
-import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from "axios";
+import axios from "axios";
 
-const config: AxiosRequestConfig = {
+const config = {
   baseURL: process.env.baseURL || process.env.apiUrl || "",
   timeout: 60 * 1000, // Timeout
   withCredentials: true, // Check cross-site Access-Control
@@ -9,19 +9,19 @@ const config: AxiosRequestConfig = {
 const instance = axios.create(config);
 
 instance.interceptors.request.use(
-  function (config: AxiosRequestConfig) {
+  function (config) {
     return config;
   },
-  function (error: AxiosError) {
+  function (error) {
     return Promise.reject(error);
   }
 );
 
 instance.interceptors.response.use(
-  function (response: AxiosResponse) {
+  function (response) {
     return response;
   },
-  function (error: AxiosError) {
+  function (error) {
     return Promise.reject(error);
   }
 );

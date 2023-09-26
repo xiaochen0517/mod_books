@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import {computed} from "vue";
 import {useStore} from "vuex";
 import TreeListItemComponent from "@/components/directory/TreeListItemComponent.vue";

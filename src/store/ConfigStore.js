@@ -9,17 +9,17 @@ const ConfigStore = {
     }
   },
   getters: {
-    getPagesConfig: (state: { pagesConfig: any }) => state.pagesConfig,
-    getSettings: (state: { settings: any; }) => state.settings
+    getPagesConfig: (state) => state.pagesConfig,
+    getSettings: (state) => state.settings
   },
   mutations: {
-    setPagesConfig (state: { pagesConfig: any }, payload: any) {
+    setPagesConfig (state, payload) {
       state.pagesConfig = payload;
     },
-    setSettings (state: { settings: any }, payload: any) {
+    setSettings (state, payload) {
       state.settings = payload;
     },
-    setTheme (state: { settings: any }, payload: string) {
+    setTheme (state, payload) {
       state.settings.theme = payload;
     }
   },
