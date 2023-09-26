@@ -8,7 +8,8 @@
         <directory-block @onClick="directoryClickHandle"/>
       </div>
       <div class="md-content-box flex-row">
-        <MdPreview class="preview-box"
+        <MdPreview ref="MdPreviewRefs"
+                   class="preview-box"
                    editorId="preview-only"
                    :modelValue="text"
                    :theme="configTheme"
@@ -22,12 +23,13 @@
 </template>
 
 <script setup>
-import {computed, onMounted, reactive, ref, watch} from "vue";
+import {computed, nextTick, onMounted, reactive, ref, watch} from "vue";
 import {useStore} from "vuex";
 import DirectoryBlock from "@/components/directory/DirectoryBlock.vue";
 import axios from "@/plugins/axios";
-import {MdPreview, MdCatalog} from "md-editor-v3";
+import {MdCatalog, MdPreview} from "md-editor-v3";
 import "md-editor-v3/lib/preview.css";
+
 import router from "@/router";
 
 const scrollElement = document.documentElement;
@@ -44,6 +46,8 @@ const pageMainPath = computed(() => store.state.ConfigStore.pagesConfig.main_pat
 
 const mdFilePath = computed(() => router.currentRoute.value.params.mdPath);
 
+const MdPreviewRefs = ref(null);
+
 onMounted(() => {
   // 获取链接中的参数
   console.log("router", mdFilePath);
@@ -53,6 +57,19 @@ onMounted(() => {
 watch(mdFilePath, () => {
   initMdContent();
 });
+
+const changeLinksClickEvent = () => {
+  // 配置点击事件
+  const links = MdPreviewRefs.value.$el.getElementsByTagName("a");
+  for (let i = 0; i < links.length; i++) {
+    links[i].addEventListener("click", function (event) {
+      event.preventDefault(); // 阻止默认点击事件
+      const href = this.getAttribute("href"); // 获取跳转的地址
+      // 在这里处理跳转的地址
+      console.log(href);
+    });
+  }
+};
 
 const initMdContent = () => {
   if (mdFilePath.value && typeof mdFilePath.value === "string") {
@@ -72,6 +89,11 @@ const getMdFile = (path) => {
   console.log("load md file", path);
   axios.get(`/${pageMainPath.value}/${path}`).then(res => {
     text.value = res.data;
+    setTimeout(() => {
+      nextTick(() => {
+        changeLinksClickEvent();
+      });
+    }, 500);
   });
 };
 

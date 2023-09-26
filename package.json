@@ -15,12 +15,12 @@
     "md-editor-v3": "^4.3.0",
     "vue": "^3.2.13",
     "vue-class-component": "^8.0.0-0",
-    "vue-router": "^4.0.3",
+    "vue-router": "^4.2.5",
     "vuex": "^4.0.0",
     "vuex-persistedstate": "^4.1.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.16",
+    "@babel/core": "^7.23.0",
     "@babel/eslint-parser": "^7.22.15",
     "@babel/plugin-transform-private-methods": "^7.22.5",
     "@vue/cli-plugin-babel": "~5.0.0",
