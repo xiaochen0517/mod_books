@@ -1,8 +1,12 @@
-import { createRouter, createWebHashHistory } from "vue-router";
+import {createRouter, createWebHashHistory} from "vue-router";
 
 const routes = [
   {
     path: "/",
+    redirect: "/home/README.md",
+  },
+  {
+    path: "/home/:mdPath",
     name: "home",
     component: () => import("../views/HomeView.vue"),
   },

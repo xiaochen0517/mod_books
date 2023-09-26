@@ -5,8 +5,8 @@ import router from "./router";
 import store from "./store";
 import axios from "./plugins/axios";
 // ant-design-vue
-import Antd from 'ant-design-vue';
-import 'ant-design-vue/dist/reset.css';
+import Antd from "ant-design-vue";
+import "ant-design-vue/dist/reset.css";
 
 const app = createApp(App);
 

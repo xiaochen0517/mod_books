@@ -1,5 +1,5 @@
-const {defineConfig} = require('@vue/cli-service')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
+const {defineConfig} = require("@vue/cli-service");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = defineConfig({
   transpileDependencies: true,
@@ -8,8 +8,8 @@ module.exports = defineConfig({
       new CopyWebpackPlugin({
         patterns: [
           {
-            from: './src/docs',
-            to: './',
+            from: "./src/docs",
+            to: "./",
             noErrorOnMissing: true,
           },
         ],
@@ -18,21 +18,21 @@ module.exports = defineConfig({
   },
   chainWebpack: config => {
     config.module
-      .rule('vue')
-      .use('vue-loader')
+      .rule("vue")
+      .use("vue-loader")
       .tap(options => ({
         ...options,
         compilerOptions: {
-          isCustomElement: tag => tag.startsWith('fluent-')
+          isCustomElement: tag => tag.startsWith("fluent-")
         }
-      }))
+      }));
   },
   css: {
     loaderOptions: {
       less: {
         // 引入styles下的
-        additionalData: `@import "~@/assets/styles/variables.less";`,
+        additionalData: "@import \"~@/assets/styles/variables.less\";",
       }
     }
   },
-})
+});
