@@ -6,7 +6,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import {computed, onMounted, ref, watch} from "vue";
 import axios from "@/plugins/axios";
 import {useStore} from "vuex";
@@ -17,10 +17,10 @@ import {theme} from "ant-design-vue";
 
 const store = useStore();
 
-const configSettings = ref<any>(defaultSetting);
-const configPages = ref<any>({pages: []});
-const pageVisible = ref<boolean>(false);
-const antdTheme = ref<any>({});
+const configSettings = ref(defaultSetting);
+const configPages = ref({pages: []});
+const pageVisible = ref(false);
+const antdTheme = ref({});
 
 const configTheme = computed(() => store.state.ConfigStore.settings.theme);
 
@@ -40,7 +40,7 @@ onMounted(async () => {
   pageVisible.value = true;
 });
 
-const refreshAntdTheme = (themeValue: string) => {
+const refreshAntdTheme = (themeValue) => {
   switch (themeValue) {
     case "light":
       antdTheme.value["algorithm"] = theme.defaultAlgorithm;
@@ -55,13 +55,13 @@ const refreshAntdTheme = (themeValue: string) => {
 
 const getModSetting = async () => {
   let res = await axios.get("/mod_settings.yml");
-  let settingConfig: any = yaml.load(res.data);
+  let settingConfig = yaml.load(res.data);
   configSettings.value = {...defaultSetting, ...settingConfig};
 };
 
 const getPagesConfig = async () => {
   let res = await axios.get("/mod_pages.yml");
-  let parsedPagesConfig: any = yaml.load(res.data);
+  let parsedPagesConfig = yaml.load(res.data);
   configPages.value = {...defaultPages, ...parsedPagesConfig};
 };
 

@@ -21,7 +21,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import {computed, onMounted, reactive, ref, watch} from "vue";
 import {useStore} from "vuex";
 import DirectoryBlock from "@/components/directory/DirectoryBlock.vue";
@@ -38,7 +38,7 @@ const mdTheme = reactive({
 
 const store = useStore();
 
-const text = ref<string>("# Hello World");
+const text = ref("# Hello World");
 
 const pageMainPath = computed(() => store.state.ConfigStore.pagesConfig.main_path);
 
@@ -66,7 +66,7 @@ const initMdContent = () => {
   }
 };
 
-const getMdFile = (path: string) => {
+const getMdFile = (path) => {
   // 将path中被转义的/转回来
   path = path.replace(/%2F/g, "/");
   console.log("load md file", path);
@@ -75,7 +75,7 @@ const getMdFile = (path: string) => {
   });
 };
 
-const directoryClickHandle = (item: any) => {
+const directoryClickHandle = (item) => {
   // 对path中的/进行转义
   item.path = item.path.replace(/\//g, "%2F");
   router.push({path: `/home/${item.path}`});
@@ -84,13 +84,13 @@ const directoryClickHandle = (item: any) => {
 const configTheme = computed(() => store.state.ConfigStore.settings.theme);
 const switchTheme = () => {
   switch (configTheme.value) {
-  case "light":
-    store.commit("setTheme", "dark");
-    break;
-  case "dark":
-    store.commit("setTheme", "light");
-    break;
-  default:
+    case "light":
+      store.commit("setTheme", "dark");
+      break;
+    case "dark":
+      store.commit("setTheme", "light");
+      break;
+    default:
   }
 };
 </script>

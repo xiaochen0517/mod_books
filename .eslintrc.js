@@ -1,35 +1,15 @@
 module.exports = {
-  "env": {
-    "browser": true,
-    "es2021": true
+  root: true,
+  env: {
+    node: true,
   },
-  "extends": [
+  extends: [
+    "plugin:vue/essential",
     "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:vue/vue3-essential"
   ],
-  "overrides": [
-    {
-      "env": {
-        "node": true
-      },
-      "files": [
-        ".eslintrc.{js,cjs}"
-      ],
-      "parserOptions": {
-        "sourceType": "script"
-      }
-    }
-  ],
-  "parserOptions": {
-    "ecmaVersion": "latest",
-    "parser": "@typescript-eslint/parser",
-    "sourceType": "module"
+  parserOptions: {
+    parser: "babel-eslint",
   },
-  "plugins": [
-    "@typescript-eslint",
-    "vue"
-  ],
   "rules": {
     // 设置template缩进为2个空格
     "vue/html-indent": [
@@ -56,8 +36,6 @@ module.exports = {
       "error",
       "always"
     ],
-    "@typescript-eslint/no-explicit-any": "off",
     "no-undef": "off",
-    "@typescript-eslint/no-var-requires": "off",
   }
 };
