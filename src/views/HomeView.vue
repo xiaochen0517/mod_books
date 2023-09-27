@@ -1,7 +1,7 @@
 <template>
   <div class="home-view">
-    <div class="top-header flex-row flex-ai-center">
-      <a-button @click="switchTheme">切换主题</a-button>
+    <div class="top-header">
+      <top-bar/>
     </div>
     <div class="flex-row">
       <div class="directory-list">
@@ -31,6 +31,7 @@ import {MdCatalog, MdPreview} from "md-editor-v3";
 import "md-editor-v3/lib/preview.css";
 
 import router from "@/router";
+import TopBar from "@/components/layout/TopBar.vue";
 
 const scrollElement = document.documentElement;
 const mdTheme = reactive({
@@ -40,7 +41,9 @@ const mdTheme = reactive({
 
 const store = useStore();
 
-const text = ref("# Hello World");
+const text = ref("");
+
+const configTheme = computed(() => store.state.ConfigStore.settings.theme);
 
 const pageMainPath = computed(() => store.state.ConfigStore.pagesConfig.main_path);
 
@@ -102,19 +105,6 @@ const directoryClickHandle = (item) => {
   item.path = item.path.replace(/\//g, "%2F");
   router.push({path: `/home/${item.path}`});
 };
-
-const configTheme = computed(() => store.state.ConfigStore.settings.theme);
-const switchTheme = () => {
-  switch (configTheme.value) {
-    case "light":
-      store.commit("setTheme", "dark");
-      break;
-    case "dark":
-      store.commit("setTheme", "light");
-      break;
-    default:
-  }
-};
 </script>
 
 <style scoped lang="less">
@@ -126,7 +116,7 @@ const switchTheme = () => {
   }
 
   .md-content-box {
-    flex: 3;
+    flex: 5;
     box-sizing: border-box;
     padding: 10px;
 

@@ -78,6 +78,7 @@ body,
   padding: 0;
   min-height: 100%;
   width: 100%;
+  font-family: 'iconfont', '微软雅黑', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 #app {
