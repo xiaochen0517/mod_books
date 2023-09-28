@@ -38,5 +38,6 @@ module.exports = {
     ],
     "no-undef": "off",
     "vue/no-v-model-argument": "off",
+    "no-unused-vars": "warn",
   }
 };
