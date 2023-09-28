@@ -37,5 +37,6 @@ module.exports = {
       "always"
     ],
     "no-undef": "off",
+    "vue/no-v-model-argument": "off",
   }
 };

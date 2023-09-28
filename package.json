@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@microsoft/fast-element": "^1.12.0",
+    "@vueuse/core": "^10.4.1",
     "ant-design-vue": "4.x",
     "babel-eslint": "^10.1.0",
     "core-js": "^3.8.3",
