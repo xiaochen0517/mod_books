@@ -16,5 +16,3 @@
 [跳转到另一个MD文件中](./config/pages.md)
 
 [跳转到百度官网](https://www.baidu.com/)
-
-[跳转百度官网无协议](www.baidu.com)
