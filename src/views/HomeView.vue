@@ -87,9 +87,6 @@ const initMdContent = () => {
 };
 
 const getMdFile = (path) => {
-  // 将path中被转义的/转回来
-  path = path.replace(/%2F/g, "/");
-  console.log("load md file", path);
   axios.get(`/${pageMainPath.value}/${path}`).then(res => {
     text.value = res.data;
     setTimeout(() => {
@@ -101,8 +98,6 @@ const getMdFile = (path) => {
 };
 
 const directoryClickHandle = (item) => {
-  // 对path中的/进行转义
-  item.path = item.path.replace(/\//g, "%2F");
   router.push({path: `/home/${item.path}`});
 };
 </script>

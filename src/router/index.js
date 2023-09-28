@@ -6,7 +6,7 @@ const routes = [
     redirect: "/home/README.md",
   },
   {
-    path: "/home/:mdPath",
+    path: "/home/:mdPath(.*)",
     name: "home",
     component: () => import("../views/HomeView.vue"),
   },
