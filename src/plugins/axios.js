@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const config = {
-  baseURL: process.env.baseURL || process.env.apiUrl || "",
+  baseURL: import.meta.env.baseURL || import.meta.env.apiUrl || "",
   timeout: 60 * 1000, // Timeout
   withCredentials: true, // Check cross-site Access-Control
 };
