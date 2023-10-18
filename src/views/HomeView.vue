@@ -66,12 +66,29 @@ const changeLinksClickEvent = () => {
   const links = MdPreviewRefs.value.$el.getElementsByTagName("a");
   for (let i = 0; i < links.length; i++) {
     links[i].addEventListener("click", function (event) {
-      event.preventDefault(); // 阻止默认点击事件
-      const href = this.getAttribute("href"); // 获取跳转的地址
+      // 阻止默认点击事件
+      event.preventDefault();
+      // 获取跳转的地址
+      const href = this.getAttribute("href");
       // 在这里处理跳转的地址
       console.log(href);
+      // 判断跳转的地址是否是外部地址
+      if (isExternalLink(href)) {
+        // 对href进行编码
+        const encodeHref = encodeURIComponent(href);
+        console.log("encode href", encodeHref);
+        // 打开一个新的窗口
+        window.open(`/#/external/${encodeHref}`);
+      } else {
+        // 跳转到指定的地址
+        // router.push({path: `/home/${href}`});
+      }
     });
   }
+};
+const isExternalLink = (url) => {
+  const pattern = /^https?:\/\//i;
+  return pattern.test(url);
 };
 
 const initMdContent = () => {
@@ -87,9 +104,6 @@ const initMdContent = () => {
 };
 
 const getMdFile = (path) => {
-  // 将path中被转义的/转回来
-  path = path.replace(/%2F/g, "/");
-  console.log("load md file", path);
   axios.get(`/${pageMainPath.value}/${path}`).then(res => {
     text.value = res.data;
     setTimeout(() => {
@@ -101,8 +115,6 @@ const getMdFile = (path) => {
 };
 
 const directoryClickHandle = (item) => {
-  // 对path中的/进行转义
-  item.path = item.path.replace(/\//g, "%2F");
   router.push({path: `/home/${item.path}`});
 };
 </script>

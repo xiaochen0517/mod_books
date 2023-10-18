@@ -32,6 +32,10 @@ onMounted(async () => {
   await getModSetting();
   await getPagesConfig();
   // 将数据保存到vuex
+  if (configTheme.value) {
+    // 如果当前主题已经在本地储存中存在，则使用本地储存中的主题
+    configSettings.value.theme = configTheme.value;
+  }
   store.commit("setSettings", configSettings.value);
   store.commit("setPagesConfig", configPages.value);
   // 设置antd主题

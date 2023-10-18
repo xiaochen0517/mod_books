@@ -1,5 +1,5 @@
 <template>
-  <div class="top-bar flex-row flex-ai-center">
+  <div class="top-bar flex-row flex-ai-center border border-gray-100 rounded-md">
     <div class="info-box">
 
     </div>
@@ -37,8 +37,6 @@ const switchTheme = () => {
   box-sizing: border-box;
   padding: 10px;
   margin: 5px;
-  border: 1px solid #e8e8e8;
-  border-radius: 10px;
 
   .info-box {
     flex: 1;

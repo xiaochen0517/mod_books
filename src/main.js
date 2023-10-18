@@ -8,6 +8,8 @@ import axios from "./plugins/axios";
 import Antd from "ant-design-vue";
 import "ant-design-vue/dist/reset.css";
 
+import "@/assets/styles/index.css";
+
 const app = createApp(App);
 
 app.config.globalProperties.$axios = axios;
