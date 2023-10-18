@@ -1,27 +1,3 @@
-<template>
-  <div class="home-view">
-    <div class="top-header">
-      <top-bar/>
-    </div>
-    <div class="flex-row">
-      <div class="directory-list">
-        <directory-block @onClick="directoryClickHandle"/>
-      </div>
-      <div class="md-content-box flex-row">
-        <MdPreview ref="MdPreviewRefs"
-                   class="preview-box"
-                   editorId="preview-only"
-                   :modelValue="text"
-                   :theme="configTheme"
-                   :previewTheme="mdTheme.previewTheme"
-                   :codeTheme="mdTheme.codeTheme"/>
-        <MdCatalog class="catalog-box primary-text-color" editorId="preview-only"
-                   :scrollElement="scrollElement"/>
-      </div>
-    </div>
-  </div>
-</template>
-
 <script setup>
 import {computed, nextTick, onMounted, reactive, ref, watch} from "vue";
 import {useStore} from "vuex";
@@ -119,29 +95,25 @@ const directoryClickHandle = (item) => {
 };
 </script>
 
-<style scoped lang="less">
-.home-view {
-  .directory-list {
-    flex: 1;
-    box-sizing: border-box;
-    padding: 10px;
-  }
-
-  .md-content-box {
-    flex: 5;
-    box-sizing: border-box;
-    padding: 10px;
-
-    .preview-box {
-      flex: 4;
-      box-sizing: border-box;
-      background-color: transparent;
-    }
-
-    .catalog-box {
-      flex: 1;
-      box-sizing: border-box;
-    }
-  }
-}
-</style>
+<template>
+  <div>
+    <top-bar/>
+    <div class="flex flex-row">
+      <div class="flex-1 box-border p-2">
+        <directory-block @onClick="directoryClickHandle"/>
+      </div>
+      <div class="flex flex-row flex-[5] box-border p-2">
+        <MdPreview ref="MdPreviewRefs"
+                   class="flex-[4] box-border"
+                   editorId="preview-only"
+                   :modelValue="text"
+                   :theme="configTheme"
+                   :previewTheme="mdTheme.previewTheme"
+                   :codeTheme="mdTheme.codeTheme"
+                   style="background-color: transparent;"/>
+        <MdCatalog class="primary-text-color flex-1 box-border" editorId="preview-only"
+                   :scrollElement="scrollElement"/>
+      </div>
+    </div>
+  </div>
+</template>

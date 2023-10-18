@@ -1,5 +1,5 @@
 <template>
-  <div class="app-view" :class="configTheme === 'dark'?'dark-theme':'light-theme'">
+  <div class="flex-grow" :class="configTheme === 'dark'?'dark-theme':'light-theme'">
     <a-config-provider :theme="antdTheme">
       <router-view v-if="pageVisible"/>
     </a-config-provider>
@@ -78,18 +78,11 @@ html,
 body,
 #app,
 .app-view {
-  margin: 0;
-  padding: 0;
-  min-height: 100%;
-  width: 100%;
+@apply m-0 p-0 min-h-full w-full;
   font-family: 'iconfont', '微软雅黑', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 #app {
-  display: flex;
-
-  .app-view {
-    flex-grow: 1;
-  }
+@apply flex flex-col;
 }
 </style>
