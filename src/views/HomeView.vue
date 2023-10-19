@@ -42,22 +42,14 @@ const changeLinksClickEvent = () => {
   const links = MdPreviewRefs.value.$el.getElementsByTagName("a");
   for (let i = 0; i < links.length; i++) {
     links[i].addEventListener("click", function (event) {
-      // 阻止默认点击事件
       event.preventDefault();
-      // 获取跳转的地址
       const href = this.getAttribute("href");
-      // 在这里处理跳转的地址
-      console.log(href);
-      // 判断跳转的地址是否是外部地址
       if (isExternalLink(href)) {
-        // 对href进行编码
         const encodeHref = encodeURIComponent(href);
         console.log("encode href", encodeHref);
-        // 打开一个新的窗口
         window.open(`/#/external/${encodeHref}`);
       } else {
-        // 跳转到指定的地址
-        // router.push({path: `/home/${href}`});
+        router.push({path: `/home/${href}`});
       }
     });
   }
