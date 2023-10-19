@@ -1,7 +1,8 @@
 <template>
-  <div class="top-bar flex-row flex-ai-center border border-gray-100 rounded-md">
-    <div class="info-box">
-
+  <div class="top-bar flex flex-row flex-ai-center p-2">
+    <div class="flex-1 flex flex-row items-center">
+      <i class="iconfont icon-address-book text-2xl"/>
+      <div class="ml-2 font-bold">{{ siteName || 'MOD BOOK' }}</div>
     </div>
     <a-button @click="switchTheme">
       <i v-if="configTheme === 'light'" class="iconfont icon-night-mode-fill"/>
@@ -17,6 +18,8 @@ import {useStore} from "vuex";
 
 const store = useStore();
 
+const siteName = computed(() => store.state.ConfigStore.settings.name);
+
 const configTheme = computed(() => store.state.ConfigStore.settings.theme);
 
 const switchTheme = () => {
@@ -31,15 +34,3 @@ const switchTheme = () => {
   }
 };
 </script>
-
-<style lang="less" scoped>
-.top-bar {
-  box-sizing: border-box;
-  padding: 10px;
-  margin: 5px;
-
-  .info-box {
-    flex: 1;
-  }
-}
-</style>
