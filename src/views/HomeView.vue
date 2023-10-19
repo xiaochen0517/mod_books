@@ -96,15 +96,17 @@ const directoryClickHandle = (item) => {
       </div>
       <div class="flex flex-row flex-[5] box-border p-2">
         <MdPreview ref="MdPreviewRefs"
-                   class="flex-[4] box-border"
+                   class="flex-1 box-border"
                    editorId="preview-only"
                    :modelValue="text"
                    :theme="configTheme"
                    :previewTheme="mdTheme.previewTheme"
                    :codeTheme="mdTheme.codeTheme"
                    style="background-color: transparent;"/>
-        <MdCatalog class="primary-text-color flex-1 box-border" editorId="preview-only"
-                   :scrollElement="scrollElement"/>
+        <div class="w-1/5 h-auto">
+          <MdCatalog class="primary-text-color box-border sticky top-2" editorId="preview-only"
+                     :scrollElement="scrollElement"/>
+        </div>
       </div>
     </div>
   </div>
