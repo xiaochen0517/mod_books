@@ -1,11 +1,3 @@
-<template>
-  <div class="flex-grow" :class="configTheme === 'dark'?'dark-theme':'light-theme'">
-    <a-config-provider :theme="antdTheme">
-      <router-view v-if="pageVisible"/>
-    </a-config-provider>
-  </div>
-</template>
-
 <script setup>
 import {computed, onMounted, ref, watch} from "vue";
 import axios from "@/plugins/axios";
@@ -71,18 +63,41 @@ const getPagesConfig = async () => {
 
 </script>
 
+<template>
+  <div class="flex-grow" :class="configTheme === 'dark'?'dark-theme':'light-theme'">
+    <a-config-provider :theme="antdTheme">
+      <router-view v-if="pageVisible"/>
+    </a-config-provider>
+  </div>
+</template>
+
 <style lang="less">
 @import "@/assets/styles/default.less";
 
 html,
-body,
-#app,
-.app-view {
+body {
 @apply m-0 p-0 min-h-full w-full;
   font-family: 'iconfont', '微软雅黑', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 #app {
-@apply flex flex-col;
+@apply h-full flex flex-col;
+}
+
+// 滚动条样式
+::-webkit-scrollbar {
+@apply w-2;
+}
+
+::-webkit-scrollbar-track {
+@apply bg-gray-600;
+}
+
+::-webkit-scrollbar-thumb {
+@apply bg-gray-700 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+@apply bg-gray-800;
 }
 </style>
