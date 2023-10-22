@@ -1,27 +1,3 @@
-<template>
-  <div class="home-view">
-    <div class="top-header">
-      <top-bar/>
-    </div>
-    <div class="flex-row">
-      <div class="directory-list">
-        <directory-block @onClick="directoryClickHandle"/>
-      </div>
-      <div class="md-content-box flex-row">
-        <MdPreview ref="MdPreviewRefs"
-                   class="preview-box"
-                   editorId="preview-only"
-                   :modelValue="text"
-                   :theme="configTheme"
-                   :previewTheme="mdTheme.previewTheme"
-                   :codeTheme="mdTheme.codeTheme"/>
-        <MdCatalog class="catalog-box primary-text-color" editorId="preview-only"
-                   :scrollElement="scrollElement"/>
-      </div>
-    </div>
-  </div>
-</template>
-
 <script setup>
 import {computed, nextTick, onMounted, reactive, ref, watch} from "vue";
 import {useStore} from "vuex";
@@ -66,22 +42,14 @@ const changeLinksClickEvent = () => {
   const links = MdPreviewRefs.value.$el.getElementsByTagName("a");
   for (let i = 0; i < links.length; i++) {
     links[i].addEventListener("click", function (event) {
-      // 阻止默认点击事件
       event.preventDefault();
-      // 获取跳转的地址
       const href = this.getAttribute("href");
-      // 在这里处理跳转的地址
-      console.log(href);
-      // 判断跳转的地址是否是外部地址
       if (isExternalLink(href)) {
-        // 对href进行编码
         const encodeHref = encodeURIComponent(href);
         console.log("encode href", encodeHref);
-        // 打开一个新的窗口
         window.open(`/#/external/${encodeHref}`);
       } else {
-        // 跳转到指定的地址
-        // router.push({path: `/home/${href}`});
+        router.push({path: `/home/${href}`});
       }
     });
   }
@@ -119,29 +87,27 @@ const directoryClickHandle = (item) => {
 };
 </script>
 
-<style scoped lang="less">
-.home-view {
-  .directory-list {
-    flex: 1;
-    box-sizing: border-box;
-    padding: 10px;
-  }
-
-  .md-content-box {
-    flex: 5;
-    box-sizing: border-box;
-    padding: 10px;
-
-    .preview-box {
-      flex: 4;
-      box-sizing: border-box;
-      background-color: transparent;
-    }
-
-    .catalog-box {
-      flex: 1;
-      box-sizing: border-box;
-    }
-  }
-}
-</style>
+<template>
+  <div>
+    <top-bar/>
+    <div class="flex flex-row">
+      <div class="flex-1 box-border p-2">
+        <directory-block @onClick="directoryClickHandle"/>
+      </div>
+      <div class="flex flex-row flex-[5] box-border p-2">
+        <MdPreview ref="MdPreviewRefs"
+                   class="flex-1 box-border"
+                   editorId="preview-only"
+                   :modelValue="text"
+                   :theme="configTheme"
+                   :previewTheme="mdTheme.previewTheme"
+                   :codeTheme="mdTheme.codeTheme"
+                   style="background-color: transparent;"/>
+        <div class="w-1/5 h-auto">
+          <MdCatalog class="primary-text-color box-border sticky top-2" editorId="preview-only"
+                     :scrollElement="scrollElement"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

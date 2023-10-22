@@ -5,6 +5,7 @@ const ConfigStore = {
       main_path: "",
     },
     settings: {
+      name: "MOD BOOKS",
       theme: "light",
     }
   },

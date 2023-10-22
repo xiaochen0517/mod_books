@@ -1,14 +1,3 @@
-<template>
-  <div class="external-view flex-column">
-    <p>你即将离开本站点是否确认跳转</p>
-    <a class="link-box" :href="encodeUrl">{{ encodeUrl }}</a>
-    <div class="control-buttons">
-      <a-button class="back-button" @click="goBack">返回</a-button>
-      <a-button type="primary" @click="jumpToNewSite">确认</a-button>
-    </div>
-  </div>
-</template>
-
 <script setup>
 import router from "@/router";
 import {onMounted} from "vue";
@@ -31,28 +20,13 @@ const jumpToNewSite = () => {
 };
 </script>
 
-<style lang="less" scoped>
-.external-view {
-  justify-content: center;
-  align-items: center;
-  justify-items: center;
-  align-content: center;
-  height: 100vh;
-
-  .link-box {
-    margin-bottom: 20px;
-  }
-
-  .control-buttons {
-    width: 250px;
-    display: flex;
-    justify-content: end;
-    justify-items: center;
-    align-content: center;
-
-    .back-button {
-      margin-right: 10px;
-    }
-  }
-}
-</style>
+<template>
+  <div class="h-screen flex flex-col justify-center items-center text-center">
+    <p>你即将离开本站点是否确认跳转</p>
+    <a class="mb-6" :href="encodeUrl">{{ encodeUrl }}</a>
+    <div class="w-64 flex flex-row justify-end items-center">
+      <a-button class="mr-2" @click="goBack">返回</a-button>
+      <a-button type="primary" @click="jumpToNewSite">确认</a-button>
+    </div>
+  </div>
+</template>
