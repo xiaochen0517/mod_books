@@ -37,8 +37,6 @@ onMounted(() => {
   gData.value = props.directory;
   dataList.length = 0;
   generateList(gData.value);
-  console.log("gData", gData.value);
-  console.log("dataList", dataList);
 });
 
 watch(props.directory, (newVal) => {
@@ -96,7 +94,6 @@ const getParentKey = (path, tree) => {
 };
 
 const onSelect = (selectedKeys, info) => {
-  console.log("selected", selectedKeys, info);
   emits("onClick", info.node);
 };
 
