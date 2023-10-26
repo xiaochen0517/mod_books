@@ -64,7 +64,7 @@ const getPagesConfig = async () => {
 </script>
 
 <template>
-  <div class="flex-grow" :class="configTheme === 'dark'?'dark-theme':'light-theme'">
+  <div class="flex-grow" :class="configTheme === 'dark'?'dark-theme dark':'light-theme'">
     <a-config-provider :theme="antdTheme">
       <router-view v-if="pageVisible"/>
     </a-config-provider>
