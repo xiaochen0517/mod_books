@@ -5,10 +5,6 @@ import {onMounted} from "vue";
 // 获取链接中的参数
 const encodeUrl = router.currentRoute.value.params.encodeUrl;
 
-onMounted(() => {
-  console.log("encodeUrl", encodeUrl);
-});
-
 const goBack = () => {
   // 关闭当前标签页
   window.close();

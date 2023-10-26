@@ -29,7 +29,6 @@ const MdPreviewRefs = ref(null);
 
 onMounted(() => {
   // 获取链接中的参数
-  console.log("router", mdFilePath);
   initMdContent();
 });
 
@@ -46,7 +45,6 @@ const changeLinksClickEvent = () => {
       const href = this.getAttribute("href");
       if (isExternalLink(href)) {
         const encodeHref = encodeURIComponent(href);
-        console.log("encode href", encodeHref);
         window.open(`/#/external/${encodeHref}`);
       } else {
         router.push({path: `/home/${href}`});
